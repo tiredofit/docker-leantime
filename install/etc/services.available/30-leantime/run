@@ -1,0 +1,29 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service both
+PROCESS_NAME="leantime"
+
+check_container_initialized
+check_service_initialized init
+liftoff
+
+mysql -u $DB_USER -p$DB_PASS -h$DB_HOST -e "use "$DB_NAME"; SELECT * FROM zp_user;" > /dev/null 2>&1
+if [ $? -gt 0 ]; then
+    ### Perform Database Installtion Routines
+    sleep 5
+    print_warn "Detected empty Database - Setting up - Please wait a few minutes"
+
+    silent curl -s -X POST http://localhost/install \
+                        -d "email=${ADMIN_EMAIL}" \
+                        -d "password=${ADMIN_PASS}" \
+                        -d "firstname=${ADMIN_FIRST_NAME}" \
+                        -d "lastname=${ADMIN_LAST_NAME}" \
+                        -d "company=${COMPANY_NAME}" \
+                        -d "install=install"
+    print_info "Initialization Complete. Please visit ${SITE_URL} and login with your credentials.."
+    s6-svc -d /var/run/s6/services/$(basename "$PWD")
+else
+    print_info "Initialization Complete. Please visit ${SITE_URL} and login with your credentials.."
+
+fi
