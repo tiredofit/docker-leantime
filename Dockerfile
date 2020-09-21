@@ -38,17 +38,14 @@ RUN set -x && \
     git clone ${LEANTIME_REPO_URL} /assets/install && \
     cd /assets/install && \
     git checkout ${LEANTIME_VERSION} && \
-    #rm -rf \
-    #    /assets/install/.env.example \
-    #    /assets/install/.env.travis \
-    #    && \
-    #\
     composer install && \
     npm install && \
     ./node_modules/grunt/bin/grunt Build-All && \
     chown -R nginx:www-data /assets/install && \
     \
 ### Cleanup
+    apk del .leantime-build-deps && \
+    rm -rf /root/.composer /root/.config /root/.npm && \
     rm -rf /var/tmp/* /var/cache/apk/*
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php7
