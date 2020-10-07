@@ -41,6 +41,7 @@ RUN set -x && \
     composer install && \
     npm install && \
     ./node_modules/grunt/bin/grunt Build-All && \
+    rm -rf /assets/install/nginx.conf && \
     chown -R nginx:www-data /assets/install && \
     \
 ### Cleanup

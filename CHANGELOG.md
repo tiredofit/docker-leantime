@@ -1,3 +1,9 @@
+## 0.99.2 2020-10-07 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add additional mapping for public/userfiles to persist logo on container restarts
+
+
 ## 0.99.1 2020-09-21 <dave at tiredofit dot ca>
 
    ### Added
