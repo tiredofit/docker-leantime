@@ -1,3 +1,9 @@
+## 0.99.4 2020-10-14 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Map missing userfiles directory and fix path permissions
+
+
 ## 0.99.3 2020-10-14 <dave at tiredofit dot ca>
 
    ### Changed

@@ -31,6 +31,7 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
             "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
                 s3_enabled="false"
                 rm -rf ${NGINX_WEBROOT}/userfiles
+                ln -sf /data/userfiles "${NGINX_WEBROOT}"/public/userfiles
                 mkdir -p /data/storage
                 ln -sf /data/storage ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
                 ln -sf /data/config "${NGINX_WEBROOT}"/config/configuration.php
@@ -53,7 +54,7 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
             "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
                 s3_enabled="false"
                 mkdir ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
-                chown -R "${NGINX_USER}":"${NGINX_GROUP}" ${NGINX_WEBROOT}/${STORAGE_FILE_PAT}
+                chown -R "${NGINX_USER}":"${NGINX_GROUP}" ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
             ;;
             "S3" | "s3" | "MINIO" | "minio" )
                 s3_enabled="true"
