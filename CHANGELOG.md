@@ -1,3 +1,9 @@
+## 0.99.3 2020-10-14 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix service from looping after checking for migrations
+
+
 ## 0.99.2 2020-10-07 <dave at tiredofit dot ca>
 
    ### Added

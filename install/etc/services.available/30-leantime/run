@@ -25,5 +25,5 @@ if [ $? -gt 0 ]; then
     s6-svc -d /var/run/s6/services/$(basename "$PWD")
 else
     print_info "Initialization Complete. Please visit ${SITE_URL} and login with your credentials.."
-
+    s6-svc -d /var/run/s6/services/$(basename "$PWD")
 fi
