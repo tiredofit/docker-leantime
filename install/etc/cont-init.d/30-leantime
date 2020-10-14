@@ -26,7 +26,7 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
     ### If running with /www/html or NGINX_WEBROOT mapped, then create persistent storage
     ### Storage redirection
     if [ -d "/data" ]; then
-        print_warn "Detected /data directory. Persistently saving settings and volatile ifnormation"
+        print_warn "Detected /data directory. Persistently saving settings and volatile information"
         case "$STORAGE_TYPE" in
             "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
                 s3_enabled="false"
