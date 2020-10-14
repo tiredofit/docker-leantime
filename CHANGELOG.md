@@ -1,3 +1,9 @@
+## 0.99.5 2020-10-14 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Patchup with persistent files
+
+
 ## 0.99.4 2020-10-14 <dave at tiredofit dot ca>
 
    ### Changed

@@ -30,9 +30,10 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
         case "$STORAGE_TYPE" in
             "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
                 s3_enabled="false"
-                rm -rf ${NGINX_WEBROOT}/userfiles
+                rm -rf ${NGINX_WEBROOT}/public/userfiles
                 ln -sf /data/userfiles "${NGINX_WEBROOT}"/public/userfiles
                 mkdir -p /data/storage
+                rm -rf ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
                 ln -sf /data/storage ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
                 ln -sf /data/config "${NGINX_WEBROOT}"/config/configuration.php
             ;;
