@@ -1,3 +1,9 @@
+## 0.99.6 2020-10-17 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add nginx declaration for /logout parameter
+
+
 ## 0.99.5 2020-10-14 <dave at tiredofit dot ca>
 
    ### Changed
