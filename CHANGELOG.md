@@ -1,3 +1,9 @@
+## 0.99.7 2020-10-18 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change default session time to 86400 seconds
+
+
 ## 0.99.6 2020-10-17 <dave at tiredofit dot ca>
 
    ### Added
