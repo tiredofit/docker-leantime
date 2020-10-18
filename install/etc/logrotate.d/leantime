@@ -1,0 +1,9 @@
+/www/logs/leantime/*.log {
+    daily
+    ifempty
+    rotate 7
+    missingok
+    compress
+    dateext
+    copytruncate
+}

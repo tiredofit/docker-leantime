@@ -1,3 +1,9 @@
+## 0.99.8 2020-10-18 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add logrotation for leantime error logs
+
+
 ## 0.99.7 2020-10-18 <dave at tiredofit dot ca>
 
    ### Changed
