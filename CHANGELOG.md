@@ -1,3 +1,9 @@
+## 0.99.9 2020-10-19 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add SMTP_AUTH environment variable
+
+
 ## 0.99.8 2020-10-18 <dave at tiredofit dot ca>
 
    ### Added

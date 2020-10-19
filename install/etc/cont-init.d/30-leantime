@@ -218,6 +218,11 @@ class config
   }
 }
 EOF
+
+    if var_false "${SMTP_AUTH}" ; then
+        sed -i "s|>mailAgent->SMTPAuth = true;|>mailAgent->SMTPAuth = false;|g" ${NGINX_WEBROOT}/src/core/class.mailer.php
+    fi
+
 else
     print_notice "Not auto generating configuration"
     if [ ! -f "${NGINX_WEBROOT}/config/configuration.php" ] ; then

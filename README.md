@@ -144,6 +144,7 @@ Used only if `SMTP_ENABLE` = `TRUE`
 | Parameter       | Description                                                         | default |
 | --------------- | ------------------------------------------------------------------- | ------- |
 | `SMTP_ENABLE`   | Use configured SMTP servers or rely on internal PHP mail() function | `FALSE` |
+| `SMTP_AUTH`     | Use SMTP Authentication `TRUE` or `FALSE`                           | `FALSE` |
 | `SMTP_FROM`     | SMTP From Name / Return Email Address                               |         |
 | `SMTP_HOST`     | SMTP Host                                                           |         |
 | `SMTP_PASS`     | SMTP Password                                                       |         |
