@@ -135,7 +135,7 @@ class config
   public \$dbDatabase="${DB_NAME}";
 
   /* Fileupload */
-  public \$userFilePath= "${STORAGE_FILES_PATH}/";
+  public \$userFilePath= "${STORAGE_FILE_PATH}/";
 
   public \$useS3 = ${s3_enabled};
   public \$s3Key = "${S3_KEY}";

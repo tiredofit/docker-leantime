@@ -1,3 +1,9 @@
+## 0.99.10 2020-10-19 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix storage user files path
+
+
 ## 0.99.9 2020-10-19 <dave at tiredofit dot ca>
 
    ### Added
