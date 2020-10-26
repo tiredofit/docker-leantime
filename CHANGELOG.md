@@ -1,3 +1,9 @@
+## 0.99.11 2020-10-26 <dave at tiredofit dot ca>
+
+   ### Added
+      - Force PHP XMLWriter to be enabled
+
+
 ## 0.99.10 2020-10-19 <dave at tiredofit dot ca>
 
    ### Changed
