@@ -2,7 +2,7 @@ FROM tiredofit/nginx-php-fpm:7.3
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Set Defaults
-ENV LEANTIME_VERSION=v2.1.5 \
+ENV LEANTIME_VERSION=v2.1.7 \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_WEBROOT=/www/html \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
