@@ -1,6 +1,5 @@
 # hub.docker.com/r/tiredofit/leantime
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/leantime.svg)](https://hub.docker.com/r/tiredofit/leantime)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/leantime.svg)](https://hub.docker.com/r/tiredofit/leantime)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/leantime.svg)](https://hub.docker.com/r/tiredofit/leantime)
 [![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/leantime.svg)](https://microbadger.com/images/tiredofit/leantime)
