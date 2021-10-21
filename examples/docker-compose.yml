@@ -20,7 +20,7 @@ services:
     - LETSENCRYPT_HOST=leantime.example.com
     - LETSENCRYPT_EMAIL=admin@example.com
 
-    - ZABBIX_HOSTNAME=leantime-app
+    - CONTAINER_NAME=leantime-app
 
     - DB_HOST=leantime-db
     - DB_NAME=leantime
@@ -52,7 +52,7 @@ services:
       - DB_USER=leantime
       - DB_PASS=leantime
 
-      - ZABBIX_HOSTNAME=leantime-db
+      - CONTAINER_NAME=leantime-db
     networks:
       - proxy-tier
     restart: always
@@ -65,7 +65,7 @@ services:
     volumes:
       - ./dbbackup:/backup
     environment:
-      - ZABBIX_HOSTNAME=leantime-db-backup
+      - CONTAINER_NAME=leantime-db-backup
       - DB_HOST=leantime-db
       - DB_TYPE=mariadb
       - DB_NAME=leantime

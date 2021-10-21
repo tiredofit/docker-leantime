@@ -1,8 +1,8 @@
-FROM tiredofit/nginx-php-fpm:7.3
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM docker.io/tiredofit/nginx-php-fpm:8.0
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Set Defaults
-ENV LEANTIME_VERSION=v2.1.7 \
+ENV LEANTIME_VERSION=v2.1.8 \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_WEBROOT=/www/html \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
@@ -15,8 +15,7 @@ ENV LEANTIME_VERSION=v2.1.7 \
     PHP_ENABLE_SIMPLEXML=TRUE \
     PHP_ENABLE_TOKENIZER=TRUE \
     PHP_ENABLE_XMLWRITER=TRUE \
-    PHP_ENABLE_ZIP=TRUE \
-    ZABBIX_HOSTNAME=leantime-app
+    PHP_ENABLE_ZIP=TRUE
 
 ### Perform Installation
 RUN set -x && \

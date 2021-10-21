@@ -1,3 +1,10 @@
+## 0.99.12 2021-10-21 <dave at tiredofit dot ca>
+
+   ### Added
+      - PHP 8.0
+      - Leantime 2.1.8
+
+
 ## 0.99.11 2020-10-26 <dave at tiredofit dot ca>
 
    ### Added

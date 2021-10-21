@@ -1,10 +1,10 @@
-# hub.docker.com/r/tiredofit/leantime
+# github.com/tiredofit/docker-leantime
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/leantime.svg)](https://hub.docker.com/r/tiredofit/leantime)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/leantime.svg)](https://hub.docker.com/r/tiredofit/leantime)
 [![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/leantime.svg)](https://microbadger.com/images/tiredofit/leantime)
 
-## Introduction
+## About
 
 This will build a container for [Leantime](https://leantime.io/) - An open source project management tool.
 
@@ -14,7 +14,7 @@ This will build a container for [Leantime](https://leantime.io/) - An open sourc
 
 [Changelog](CHANGELOG.md)
 
-## Authors
+## Maintainer
 
 - [Dave Conroy](https://github.com/tiredofit)
 
@@ -40,7 +40,7 @@ This will build a container for [Leantime](https://leantime.io/) - An open sourc
   - [Shell Access](#shell-access)
 - [References](#references)
 
-## Prerequisites
+## Prerequisites and Assumptions
 
 This image assumes that you are using a reverse proxy such as
 [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) and optionally the [Let's Encrypt Proxy
@@ -72,7 +72,7 @@ Login to the web server and enter in your admin email address, admin password an
 
 ## Configuration
 
-### Data-Volumes
+### Persistent Storage
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
