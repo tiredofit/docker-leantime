@@ -15,7 +15,9 @@ ENV LEANTIME_VERSION=v2.1.8 \
     PHP_ENABLE_SIMPLEXML=TRUE \
     PHP_ENABLE_TOKENIZER=TRUE \
     PHP_ENABLE_XMLWRITER=TRUE \
-    PHP_ENABLE_ZIP=TRUE
+    PHP_ENABLE_ZIP=TRUE \
+    IMAGE_NAME="tiredofit/leantime" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-leantime/"
 
 ### Perform Installation
 RUN set -x && \

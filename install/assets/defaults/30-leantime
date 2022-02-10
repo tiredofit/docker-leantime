@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 ADMIN_FIRST_NAME=${ADMIN_FIRST_NAME:-"Admin"}
 ADMIN_LAST_NAME=${ADMIN_LAST_NAME:-"User"}

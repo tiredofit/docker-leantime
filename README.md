@@ -90,8 +90,6 @@ The following directories are used for configuration and can be mapped for persi
 
 Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine), and [Web Image](https://hub.docker.com/r/tiredofit/nginx), and [PHP Image](https://hub.docker.com/r/tiredofit/nginx-php-fpm) below is the complete list of available options that can be used to customize your installation.
 
-#!/usr/bin/with-contenv bash
-
 #### Application Settings
 
 | Parameter            | Description                                                                                    | Default             |
