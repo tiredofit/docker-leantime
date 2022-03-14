@@ -1,3 +1,9 @@
+## 0.99.14 2022-03-14 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for S6 Overlay 3.0 removing access to /var/run/s6/services/
+
+
 ## 0.99.13 2022-02-10 <dave at tiredofit dot ca>
 
    ### Changed
