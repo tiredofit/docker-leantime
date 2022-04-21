@@ -1,3 +1,9 @@
+## 0.99.15 2022-04-21 <dave at tiredofit dot ca>
+
+   ### Added
+      - Revert to PHP 7.4
+
+
 ## 0.99.14 2022-03-14 <dave at tiredofit dot ca>
 
    ### Changed

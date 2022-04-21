@@ -1,4 +1,4 @@
-FROM docker.io/tiredofit/nginx-php-fpm:8.0
+FROM docker.io/tiredofit/nginx-php-fpm:7.4
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Set Defaults
