@@ -4,6 +4,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 ### Set Defaults
 ENV LEANTIME_VERSION=v2.1.9 \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
+    NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
     PHP_ENABLE_CURL=TRUE \
