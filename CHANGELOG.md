@@ -1,3 +1,9 @@
+## 0.99.19 2022-07-05 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Force LDAP Extension to load upon composer install
+
+
 ## 0.99.18 2022-06-23 <dave at tiredofit dot ca>
 
    ### Added

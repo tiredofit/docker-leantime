@@ -37,6 +37,7 @@ RUN set -x && \
 	      && \
     \
 ### WWW  Installation
+    php-ext enable core && \    
     mkdir -p /assets/install && \
     git clone ${LEANTIME_REPO_URL} /assets/install && \
     cd /assets/install && \
