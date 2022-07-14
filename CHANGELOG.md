@@ -1,3 +1,9 @@
+## 0.99.21 2022-07-13 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update to PHP 8.0
+
+
 ## 0.99.20 2022-07-13 <dave at tiredofit dot ca>
 
    ### Added
