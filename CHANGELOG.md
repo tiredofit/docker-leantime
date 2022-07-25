@@ -1,3 +1,9 @@
+## 0.99.23 2022-07-25 <dave at tiredofit dot ca>
+
+   ### Added
+      - Leantime 2.2.2
+
+
 ## 0.99.22 2022-07-16 <dave at tiredofit dot ca>
 
    ### Added
