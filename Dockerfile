@@ -28,16 +28,16 @@ RUN set -x && \
               git \
               nodejs \
               npm \
-	      && \
+              && \
     \
     apk add -t .leantime-run-deps \
               expect \
               gnu-libiconv \
               sed \
-	      && \
+              && \
     \
 ### WWW  Installation
-    php-ext enable core && \    
+    php-ext enable core && \
     mkdir -p /assets/install && \
     git clone ${LEANTIME_REPO_URL} /assets/install && \
     cd /assets/install && \
@@ -53,7 +53,7 @@ RUN set -x && \
     rm -rf /root/.composer /root/.config /root/.npm && \
     rm -rf /var/tmp/* /var/cache/apk/*
 
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php7
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 ### Assets
 ADD install /

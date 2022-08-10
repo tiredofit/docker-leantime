@@ -1,3 +1,15 @@
+## 1.0.0 2022-08-10 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update configuration to support Primary Theme Colours
+      - Update configuration to support Secondary Theme Colours
+      - Add LDAP Support
+      - Add App Debugging Support
+      - Add additional S3 Features
+      - Add Default Timezone configuration
+      - Cleanup Code
+
+
 ## 0.99.26 2022-08-06 <dave at tiredofit dot ca>
 
    ### Added

@@ -1,44 +1,39 @@
-version: '2'
+version: '2.4'
 
 services:
-
   leantime-app:
     image: tiredofit/leantime
     container_name: leantime-app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.leantime.rule=Host(`monica.example.com`)
+      - traefik.http.services.leantime.loadbalancer.server.port=80
     links:
-    - leantime-db
+      - leantime-db
     volumes:
     ### If you want to perform customizations to the source and have access to it, then uncomment this line - This includes modules
-    #- ./data:/www/html
+      #- ./data:/www/html
     ### Or, if you just want to use Stock leantime and hold onto persistent files like cache and session use this, one or the other.
-    - ./data:/data
-    - ./logs/:/www/logs
+      - ./data:/data
+      - ./logs/:/www/logs
     environment:
-    - VIRTUAL_HOST=leantime.example.com
-    - VIRTUAL_NETWORK=nginx-proxy
-    - VIRTUAL_PORT=80
-    - LETSENCRYPT_HOST=leantime.example.com
-    - LETSENCRYPT_EMAIL=admin@example.com
+      - TIMEZONE=America/Vancouver
+      - CONTAINER_NAME=leantime-app
 
-    - CONTAINER_NAME=leantime-app
+      - DB_HOST=leantime-db
+      - DB_NAME=leantime
+      - DB_USER=leantime
+      - DB_PASS=leantime
 
-    - DB_HOST=leantime-db
-    - DB_NAME=leantime
-    - DB_USER=leantime
-    - DB_PASS=leantime
-
-    - SITE_URL=https://leantime.example.com
-    - SITE_NAME=Leantime
-    - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASS=admin
-    - ADMIN_FIRST_NAME=Leantime
-    - ADMIN_LAST_NAME=Administrator
-    - COMPANY_NAME=Example Company
-
-    - TIMEZONE=America/Vancouver
-
+      - SITE_URL=https://leantime.example.com
+      - SITE_NAME=Leantime
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASS=admin
+      - ADMIN_FIRST_NAME=Leantime
+      - ADMIN_LAST_NAME=Administrator
+      - COMPANY_NAME=Example Company
     networks:
-      - proxy-tier
+      - services
     restart: always
 
   leantime-db:
@@ -54,7 +49,7 @@ services:
 
       - CONTAINER_NAME=leantime-db
     networks:
-      - proxy-tier
+      - services
     restart: always
 
   leantime-db-backup:
@@ -74,16 +69,13 @@ services:
       - DB_DUMP_FREQ=1440
       - DB_DUMP_BEGIN=0000
       - DB_CLEANUP_TIME=8640
-      - COMPRESSION=BZ
-      - MD5=TRUE
     networks:
-      - proxy-tier
+      - services
     restart: always
 
-
 networks:
-  proxy-tier:
-    external:
-      name: nginx-proxy
-
+  proxy:
+    external: true
+  services:
+    external: true
 

@@ -15,11 +15,12 @@ db_ready mariadb
 mkdir -p /www/logs/leantime
 chown -R "${NGINX_USER}":"${NGINX_GROUP}" /www/logs/leantime
 rm -rf "${NGINX_WEBROOT}"/resources/logs
-mkdir -p ${NGINX_WEBROOT}/resources
+mkdir -p "${NGINX_WEBROOT}"/resources
 ln -sf /www/logs/leantime "${NGINX_WEBROOT}"/resources/logs
+create_logrotate leantime /www/logs/leantime/error.log "${NGINX_USER}" "${NGINX_GROUP}"
 
 ### Check if New Install
-if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
+if [ ! -f "${NGINX_WEBROOT}"/server.php ]; then
     print_warn "Potential New Installation / Standalone Installation Detected - Copying Leantime Sourcecode"
     silent cp -a /assets/install/* "${NGINX_WEBROOT}"
 
@@ -27,17 +28,22 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
     ### Storage redirection
     if [ -d "/data" ]; then
         print_warn "Detected /data directory. Persistently saving settings and volatile information"
-        case "$STORAGE_TYPE" in
-            "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
+        case "${STORAGE_TYPE,,}" in
+            files* | local )
                 s3_enabled="false"
-                rm -rf ${NGINX_WEBROOT}/public/userfiles
+                rm -rf "${NGINX_WEBROOT}"/public/userfiles
+                mkdir -p "${NGINX_WEBROOT}"/public/
                 ln -sf /data/userfiles "${NGINX_WEBROOT}"/public/userfiles
                 mkdir -p /data/storage
-                rm -rf ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
-                ln -sf /data/storage ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
+                rm -rf "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
+                ln -sf /data/storage "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
                 ln -sf /data/config "${NGINX_WEBROOT}"/config/configuration.php
+                mkdir -p "${BACKUP_FILE_PATH}"
+                rm -rf "${NGINX_WEBROOT}"/backupdb
+                ln -sf "${BACKUP_FILE_PATH}" "${NGINX_WEBROOT}"/"${BACKUP_FILE_PATH}"
+                chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${BACKUP_FILE_PATH}"
             ;;
-            "S3" | "s3" | "MINIO" | "minio" )
+            "s3" | "minio" )
                 s3_enabled="true"
             ;;
             * )
@@ -45,19 +51,22 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
                 exit 1
             ;;
         esac
+        mkdir -p "${NGINX_WEBROOT}"/config/
         ln -sf /data/config "${NGINX_WEBROOT}"/config/configuration.php
         touch /data/config
         chown "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"/config/configuration.php
         ln -sf /data/.leantime-version "${NGINX_WEBROOT}"/.leantime-version
         chown -R "${NGINX_USER}":"${NGINX_GROUP}" /data
     else
-        case "$STORAGE_TYPE" in
-            "FILES" | "files" | "FILESYSTEM" | "filesystem" | "LOCAL" | "local" )
+        case "${STORAGE_TYPE,,}" in
+            files* | local )
                 s3_enabled="false"
-                mkdir ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
-                chown -R "${NGINX_USER}":"${NGINX_GROUP}" ${NGINX_WEBROOT}/${STORAGE_FILE_PATH}
+                mkdir "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
+                chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
+                mkdir "${NGINX_WEBROOT}"/"${BACKUP_FILE_PATH}"
+                chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"/"${BACKUP_FILE_PATH}"
             ;;
-            "S3" | "s3" | "MINIO" | "minio" )
+            "s3" | "minio" )
                 s3_enabled="true"
             ;;
             * )
@@ -67,15 +76,18 @@ if [ ! -f "${NGINX_WEBROOT}/server.php" ]; then
         esac
     fi
 
+    mkdir -p "${BACKUP_FILE_PATH}"
+    chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${BACKUP_FILE_PATH}"
+
     ### Auto Upgrade functionality
-    if [ ! -f "${NGINX_WEBROOT}/.leantime-version" ]; then
+    if [ ! -f "${NGINX_WEBROOT}"/.leantime-version ]; then
         echo "${LEANTIME_VERSION} first installed on $(date)" >> "${NGINX_WEBROOT}"/.leantime-version
     fi
     chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"
 else
-    if [ "$ENABLE_AUTO_UPDATE" = "TRUE" ]; then
-        if [ "$LEANTIME_VERSION" != $(head -n 1 "${NGINX_WEBROOT}"/.leantime-version | awk '{print $1'}) ]; then
-        print_warn "Detected in place Leantime version $(head -n 1 "${NGINX_WEBROOT}"/.leantime-version | awk "{print $1"}) - Upgrading to ${LEANTIME_VERSION}"
+    if [ "${ENABLE_AUTO_UPDATE,,}" = "true" ]; then
+        if [ "${LEANTIME_VERSION}" != "$(head -n 1 "${NGINX_WEBROOT}"/.leantime-version | awk '{print $1}')" ]; then
+        print_warn "Detected in place Leantime version $(head -n 1 "${NGINX_WEBROOT}"/.leantime-version | awk '{print $1}') - Upgrading to ${LEANTIME_VERSION}"
             cp -R /assets/install/* "${NGINX_WEBROOT}"
             chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"
             cd "${NGINX_WEBROOT}"|| exit
@@ -89,11 +101,11 @@ custom_files "${CONTAINER_CUSTOM_PATH}" "${NGINX_WEBROOT}" "${NGINX_USER}" "${NG
 custom_scripts
 
 ### Dynamically Create Configuration
-if [ "$SETUP_TYPE" = "AUTO" ]; then
+if [ "${SETUP_TYPE,,}" = "auto" ]; then
     print_info "Auto Configuring based on Environment Variables"
     print_info "Generating Configuration"
 
-    if var_true ${s3_enabled} ; then
+    if var_true "${s3_enabled}" ; then
             print_debug "Enabling S3 Functions"
             sanity_var S3_KEY "S3 Key"
             sanity_var S3_SECRET "S3 Secret"
@@ -101,56 +113,108 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
             sanity_var S3_BUCKET "S3 Bucket"
     fi
 
-    cat <<EOF > ${NGINX_WEBROOT}/config/configuration.php
+    cat <<EOF > "${NGINX_WEBROOT}"/config/configuration.php
 <?php
 namespace leantime\core;
 
 class config
 {
-  /* General */
-  public \$sitename = "${SITE_NAME}";
-  public \$language = "${LANGUAGE}";
-  public \$mainColor = "${DEFAULT_COLOR}";
-  public \$logoPath = "${LOGO_PATH}${LOGO_FILE}";
-  public \$appUrl = "${SITE_URL}";
+    /* General */
+    public \$sitename = "${SITE_NAME}";
+    public \$language = "${LANGUAGE}";
+    public \$mainColor = "${DEFAULT_COLOR}";
+    public \$logoPath = "${LOGO_PATH}${LOGO_FILE}";
+    public \$appUrl = "${SITE_URL}";
+    public \$defaultTimezone = "${TIMEZONE}";
 
-  /* Database */
-  public \$dbHost="${DB_HOST}";
-  public \$dbUser="${DB_USER}";
-  public \$dbPassword="${DB_PASS}";
-  public \$dbDatabase="${DB_NAME}";
+    /* Database */
+    public \$dbHost="${DB_HOST}";
+    public \$dbUser="${DB_USER}";
+    public \$dbPassword="${DB_PASS}";
+    public \$dbDatabase="${DB_NAME}";
 
-  /* Fileupload */
-  public \$userFilePath= "${STORAGE_FILE_PATH}/";
+    /* Fileupload */
+    public \$userFilePath= "${STORAGE_FILE_PATH}/";
+    public \$dbBackupPath = '${BACKUP_FILE_PATH}/'; //Local relative path to store backup files, need permission to write
 
-  public \$useS3 = ${s3_enabled};
-  public \$s3Key = "${S3_KEY}";
-  public \$s3Secret = "${S3_SECRET}";
-  public \$s3Bucket = "${S3_BUCKET}";
-  public \$s3Region = "${S3_REGION}";
-  public \$s3FolderName = "${S3_FOLDER_NAME}";
+    public \$useS3 = ${s3_enabled};
+    public \$s3Key = "${S3_KEY}";
+    public \$s3Secret = "${S3_SECRET}";
+    public \$s3Bucket = "${S3_BUCKET}";
+    public \$s3Region = "${S3_REGION}";
+    public \$s3FolderName = "${S3_FOLDER_NAME}";
+    public \$s3EndPoint = '';
 
-  /* Sessions */
-  public \$sessionpassword = "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)";
-  public \$sessionExpiration = ${SESSION_EXPIRE};
+    /* Sessions */
+    public \$sessionpassword = "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)";
+    public \$sessionExpiration = ${SESSION_EXPIRE};
 
-  /* Email */
-  public \$email = "${SMTP_FROM}";
-  public \$useSMTP = ${SMTP_ENABLE};
-  public \$smtpHosts = "${SMTP_HOST}";
-  public \$smtpUsername ="${SMTP_USER}";
-  public \$smtpPassword = "${SMTP_PASS}";
-  public \$smtpAutoTLS = ${SMTP_TLS_AUTO};
-  public \$smtpSecure ="${SMTP_PROTOCOL}";
-  public \$smtpPort = "${SMTP_PORT}";
+    /* Email */
+    public \$email = "${SMTP_FROM}";
+    public \$useSMTP = ${SMTP_ENABLE};
+    public \$smtpHosts = "${SMTP_HOST}";
+    public \$smtpUsername ="${SMTP_USER}";
+    public \$smtpPassword = "${SMTP_PASS}";
+    public \$smtpAutoTLS = ${SMTP_TLS_AUTO};
+    public \$smtpSecure ="${SMTP_PROTOCOL}";
+    public \$smtpPort = "${SMTP_PORT}";
+
+    /*ldap default settings (can be changed in company settings */
+    /*ldap default settings*/
+    public \$useLdap = ${ENABLE_LDAP,,};
+    public \$ldapType = '${LDAP_TYPE}';
+    public \$ldapHost = '${LDAP_HOST}';
+    public \$ldapPort = ${LDAP_PORT};
+    public \$baseDn = '${LDAP_BASE_DN}';
+    public \$ldapDn = '${LDAP_DN}';
+    public \$ldapUserDomain = '${LDAP_USER_DOMAIN}';
+    public \$bindUser = '${LDAP_BIND_DN}';
+    public \$bindPassword = '${LDAP_BIND_PASS}';
+
+    //Default ldap keys in your directory.
+    public \$ldapKeys = '{
+        "username":"${LDAP_ATTRIBUTE_USER}",
+        "groups":"${LDAP_ATTRIBUTE_GROUPS}",
+        "email":"${LDAP_ATTRIBUTE_MAIL}",
+        "firstname":"${LDAP_ATTRIBUTE_FIRST_NAME}",
+        "lastname":"${LDAP_ATTRIBUTE_LAST_NAME}"
+        }';
+
+    //Default role assignments upon first login. (Optional) Can be updated in user settings for each user
+    public \$ldapLtGroupAssignments = '{
+          "10": {
+            "ltRole":"client",
+            "ldapRole":"${LDAP_GROUP_ROLE_CLIENT}"
+          },
+          "20": {
+            "ltRole":"developer",
+            "ldapRole":"${LDAP_GROUP_ROLE_DEVELOPER}"
+          },
+          "30": {
+            "ltRole":"clientManager",
+            "ldapRole":"${LDAP_GROUP_ROLE_CLIENT_MANAGER}"
+          },
+          "40": {
+            "ltRole":"manager",
+            "ldapRole":"${LDAP_GROUP_ROLE_MANAGER}"
+          },
+          "50": {
+            "ltRole":"admin",
+            "ldapRole":"${LDAP_GROUP_ROLE_ADMIN}"
+          }
+        }';
+
+    public \$ldapDefaultRoleKey = ${LDAP_DEFAULT_USER_KEY};
 
   function __construct(){
     /* General */
     \$this->sitename = \$this->configEnvironmentHelper("LEAN_SITENAME", \$this->sitename);
     \$this->language = \$this->configEnvironmentHelper("LEAN_LANGUAGE", \$this->language);
-    \$this->mainColor = \$this->configEnvironmentHelper("LEAN_MAIN_COLOR", \$this->mainColor);
     \$this->logoPath = \$this->configEnvironmentHelper("LEAN_LOGO_PATH", \$this->logoPath);
     \$this->appUrl = \$this->configEnvironmentHelper("LEAN_APP_URL", \$this->appUrl);
+    \$this->primarycolor = \$this->configEnvironmentHelper("LEAN_PRIMARY_COLOR", \$this->primarycolor);
+    \$this->secondarycolor = \$this->configEnvironmentHelper("LEAN_SECONDARY_COLOR", \$this->secondarycolor);
+    \$this->defaultTimezone = \$this->configEnvironmentHelper("TIMEZONE", \$this->defaultTimezone);
 
     /* Database */
     \$this->dbHost = \$this->configEnvironmentHelper("LEAN_DB_HOST", \$this->dbHost);
@@ -162,9 +226,11 @@ class config
     \$this->userFilePath= \$this->configEnvironmentHelper("LEAN_USER_FILE_PATH", \$this->userFilePath);
 
     \$this->useS3 = \$this->configEnvironmentHelper("LEAN_USE_S3", \$this->useS3, "boolean");
+    \$this->s3EndPoint = \$this->configEnvironmentHelper("LEAN_S3_END_POINT", \$this->s3EndPoint);
     \$this->s3Key = \$this->configEnvironmentHelper("LEAN_S3_KEY", \$this->s3Key);
     \$this->s3Secret = \$this->configEnvironmentHelper("LEAN_S3_SECRET", \$this->s3Secret);
     \$this->s3Bucket = \$this->configEnvironmentHelper("LEAN_S3_BUCKET", \$this->s3Bucket);
+    \$this->s3UsePathStyleEndpoint = \$this->configEnvironmentHelper("LEAN_S3_USE_PATH_STYLE_ENDPOINT", \$this->s3UsePathStyleEndpoint, "boolean");
     \$this->s3Region = \$this->configEnvironmentHelper("LEAN_S3_REGION", \$this->s3Region);
     \$this->s3FolderName = \$this->configEnvironmentHelper("LEAN_S3_FOLDER_NAME", \$this->s3FolderName);
 
@@ -182,7 +248,18 @@ class config
     \$this->smtpSecure = \$this->configEnvironmentHelper("LEAN_EMAIL_SMTP_SECURE", \$this->smtpSecure);
     \$this->smtpPort = \$this->configEnvironmentHelper("LEAN_EMAIL_SMTP_PORT", \$this->smtpPort);
 
-  }
+    /*ldap*/
+    \$this->useLdap = \$this->configEnvironmentHelper("LEAN_LDAP_USE_LDAP", \$this->useLdap);
+    \$this->ldapType = \$this->configEnvironmentHelper("LEAN_LDAP_LDAP_TYPE", \$this->ldapType);
+    \$this->ldapHost = \$this->configEnvironmentHelper("LEAN_LDAP_HOST", \$this->ldapHost);
+    \$this->ldapPort = \$this->configEnvironmentHelper("LEAN_LDAP_PORT", \$this->ldapPort);
+    \$this->baseDn = \$this->configEnvironmentHelper("LEAN_LDAP_BASE_DN", \$this->baseDn);
+    \$this->ldapDn = \$this->configEnvironmentHelper("LEAN_LDAP_DN", \$this->ldapDn);
+    \$this->ldapUserDomain = \$this->configEnvironmentHelper("LEAN_LDAP_USER_DOMAIN", \$this->ldapUserDomain);
+    \$this->ldapKeys = \$this->configEnvironmentHelper("LEAN_LDAP_KEYS", \$this->ldapKeys);
+    \$this->ldapLtGroupAssignments = \$this->configEnvironmentHelper("LEAN_LDAP_GROUP_ASSIGNMENT", \$this->ldapLtGroupAssignments);
+    \$this->ldapDefaultRoleKey = \$this->configEnvironmentHelper("LEAN_LDAP_DEFAULT_ROLE_KEY", \$this->ldapDefaultRoleKey);
+    }
 
   private function configEnvironmentHelper(\$envVar, \$default, \$dataType = "string") {
     \$found = getenv(\$envVar);
@@ -206,14 +283,14 @@ class config
 EOF
 
     if var_false "${SMTP_AUTH}" ; then
-        sed -i "s|>mailAgent->SMTPAuth = true;|>mailAgent->SMTPAuth = false;|g" ${NGINX_WEBROOT}/src/core/class.mailer.php
+        sed -i "s|>mailAgent->SMTPAuth = true;|>mailAgent->SMTPAuth = false;|g" "${NGINX_WEBROOT}"/src/core/class.mailer.php
     fi
 
 else
     print_notice "Not auto generating configuration"
-    if [ ! -f "${NGINX_WEBROOT}/config/configuration.php" ] ; then
+    if [ ! -f "${NGINX_WEBROOT}"/config/configuration.php ] ; then
         print_debug "Creating Sample Configuration"
-        cp -R ${NGINX_WEBROOT}/config/configuration.sample.php ${NGINX_WEBROOT}/config/configuration.php
+        cp -R "${NGINX_WEBROOT}"/config/configuration.sample.php "${NGINX_WEBROOT}"/config/configuration.php
     fi
 fi
 
