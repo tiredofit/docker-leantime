@@ -1,3 +1,12 @@
+## 1.0.1 2022-08-10 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fixup to 1.0.0 release
+      - Correctly added Primary Secondary Theme Colors
+      - Added Default LDAP_PORT environment variable
+      - Added S3_ENDPOINT_PATHSTYLE delcaration
+
+
 ## 1.0.0 2022-08-10 <dave at tiredofit dot ca>
 
    ### Added

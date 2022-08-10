@@ -122,10 +122,11 @@ class config
     /* General */
     public \$sitename = "${SITE_NAME}";
     public \$language = "${LANGUAGE}";
-    public \$mainColor = "${DEFAULT_COLOR}";
     public \$logoPath = "${LOGO_PATH}${LOGO_FILE}";
     public \$appUrl = "${SITE_URL}";
     public \$defaultTimezone = "${TIMEZONE}";
+    public \$primarycolor = '${THEME_COLOR_PRIMARY}';
+    public \$secondarycolor = '${THEME_COLOR_SECONDARY}';
 
     /* Database */
     public \$dbHost="${DB_HOST}";
@@ -135,15 +136,16 @@ class config
 
     /* Fileupload */
     public \$userFilePath= "${STORAGE_FILE_PATH}/";
-    public \$dbBackupPath = '${BACKUP_FILE_PATH}/'; //Local relative path to store backup files, need permission to write
+    public \$dbBackupPath = "${BACKUP_FILE_PATH}/";
 
-    public \$useS3 = ${s3_enabled};
+    public \$useS3 = ${s3_enabled,,};
     public \$s3Key = "${S3_KEY}";
     public \$s3Secret = "${S3_SECRET}";
     public \$s3Bucket = "${S3_BUCKET}";
+    public \$s3UsePathStyleEndpoint = ${S3_ENDPOINT_PATHSTYLE,,};
     public \$s3Region = "${S3_REGION}";
     public \$s3FolderName = "${S3_FOLDER_NAME}";
-    public \$s3EndPoint = '';
+    public \$s3EndPoint = "${S3_ENDPOINT}";
 
     /* Sessions */
     public \$sessionpassword = "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)";
@@ -151,7 +153,7 @@ class config
 
     /* Email */
     public \$email = "${SMTP_FROM}";
-    public \$useSMTP = ${SMTP_ENABLE};
+    public \$useSMTP = ${SMTP_ENABLE,,};
     public \$smtpHosts = "${SMTP_HOST}";
     public \$smtpUsername ="${SMTP_USER}";
     public \$smtpPassword = "${SMTP_PASS}";

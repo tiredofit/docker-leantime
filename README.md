@@ -197,14 +197,15 @@ Can also be set within the application
 
 Used only if `STORAGE_TYPE` = `S3`
 
-| Parameter        | Description                   | default |
-| ---------------- | ----------------------------- | ------- |
-| `S3_BUCKET`      | S3 Bucket Name                |         |
-| `S3_FOLDER_NAME` | S3 Folder Name (Can be blank) |         |
-| `S3_ENDPOINT`    | S3 Endpoint                   |         |
-| `S3_KEY`         | S3 Key                        |         |
-| `S3_REGION`      | S3 Region                     |         |
-| `S3_SECRET`      | S3 Secret                     |         |
+| Parameter               | Description                                                                                  | default |
+| ----------------------- | -------------------------------------------------------------------------------------------- | ------- |
+| `S3_BUCKET`             | S3 Bucket Name                                                                               |         |
+| `S3_FOLDER_NAME`        | S3 Folder Name (Can be blank)                                                                |         |
+| `S3_ENDPOINT`           | S3 Endpoint                                                                                  |         |
+| `S3_ENDPOINT_PATHSTYLE` | `FALSE` https://[`S3_BUCKET`].[`S3_ENDPOINT`] / `TRUE` https://[`S3_ENDPOINT`]/[`S3_BUCKET`] | `FALSE` |
+| `S3_KEY`                | S3 Key                                                                                       |         |
+| `S3_REGION`             | S3 Region                                                                                    |         |
+| `S3_SECRET`             | S3 Secret                                                                                    |         |
 
 #### SMTP Settings
 
