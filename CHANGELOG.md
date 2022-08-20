@@ -1,3 +1,9 @@
+## 1.0.2 2022-08-20 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for LDAP_ATTRIBUTE_FIRST_NAME value
+
+
 ## 1.0.1 2022-08-10 <dave at tiredofit dot ca>
 
    ### Changed
