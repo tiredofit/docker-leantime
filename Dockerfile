@@ -2,7 +2,7 @@ FROM docker.io/tiredofit/nginx-php-fpm:8.0
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Set Defaults
-ENV LEANTIME_VERSION=v2.2.4 \
+ENV LEANTIME_VERSION=v2.2.5 \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \
