@@ -168,11 +168,11 @@ Can also be set within the application
 | `LDAP_DEFAULT_ROLE`              |                                                                                                             |                           |
 | `LDAP_DEFAULT_USER_KEY`          | Default role to add new users `10` client `20` developer `30` Client Manager `40` Manager`50` Administrator | `20`                      |
 | `LDAP_DN`                        | Users Location eg `cn=users,dc=example,dc=com`                                                              |                           |
-| `LDAP_GROUP_ROLE_ADMIN`          | LDAP Group name to assign Admin (40) Role                                                                   | `bookstack-admin`         |
-| `LDAP_GROUP_ROLE_CLIENT_MANAGER` | LDAP Group name to assign Client Manager (30) Role                                                          | `bookstack-clientmanager` |
-| `LDAP_GROUP_ROLE_CLIENT`         | LDAP Group name to assign Client (10) Role                                                                  | `bookstack-client`        |
-| `LDAP_GROUP_ROLE_DEVELOPER`      | LDAP Group name to assign Developer (20) Role                                                               | `bookstack-developer`     |
-| `LDAP_GROUP_ROLE_MANAGER`        | LDAP Group name to assign Manager (40) Role                                                                 | `bookstack-manager`       |
+| `LDAP_GROUP_ROLE_ADMIN`          | LDAP Group name to assign Admin (40) Role                                                                   | `leantime-admin`          |
+| `LDAP_GROUP_ROLE_CLIENT_MANAGER` | LDAP Group name to assign Client Manager (30) Role                                                          | `leantime-clientmanager`  |
+| `LDAP_GROUP_ROLE_CLIENT`         | LDAP Group name to assign Client (10) Role                                                                  | `leantime-client`         |
+| `LDAP_GROUP_ROLE_DEVELOPER`      | LDAP Group name to assign Developer (20) Role                                                               | `leantime-developer`      |
+| `LDAP_GROUP_ROLE_MANAGER`        | LDAP Group name to assign Manager (40) Role                                                                 | `leantime-manager`        |
 | `LDAP_HOST`                      | LDAP Hostname                                                                                               |                           |
 | `LDAP_PORT`                      | LDAP Port                                                                                                   | `389`                     |
 | `LDAP_TYPE`                      | `OL` OpenLDAP or `AD` Active Directory                                                                      | `OL`                      |

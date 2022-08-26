@@ -1,3 +1,10 @@
+## 1.0.6 2022-08-25 <dave at tiredofit dot ca>
+
+   ### Changed
+      - We're using Leantime, not Bookstack. All LDAP Role names changed to "leantime-*"
+      - Fixed mispelling for memberOf for LDAP Group assignment
+
+
 ## 1.0.5 2022-08-24 <dave at tiredofit dot ca>
 
    ### Added
