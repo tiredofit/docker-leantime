@@ -105,6 +105,7 @@ if [ "${SETUP_TYPE,,}" = "auto" ]; then
     print_info "Auto Configuring based on Environment Variables"
     print_info "Generating Configuration"
 
+    truefalse_onezero APP_DEBUG
     if var_true "${s3_enabled}" ; then
             print_debug "Enabling S3 Functions"
             sanity_var S3_KEY "S3 Key"
@@ -127,12 +128,14 @@ class config
     public \$defaultTimezone = "${TIMEZONE}";
     public \$primarycolor = '${THEME_COLOR_PRIMARY}';
     public \$secondarycolor = '${THEME_COLOR_SECONDARY}';
+    public \$debug = ${APP_DEBUG};
 
     /* Database */
     public \$dbHost="${DB_HOST}";
     public \$dbUser="${DB_USER}";
     public \$dbPassword="${DB_PASS}";
     public \$dbDatabase="${DB_NAME}";
+    public \$dbPort = '${DB_PORT}';
 
     /* Fileupload */
     public \$userFilePath= "${STORAGE_FILE_PATH}/";
@@ -179,7 +182,8 @@ class config
         "groups":"${LDAP_ATTRIBUTE_GROUPS}",
         "email":"${LDAP_ATTRIBUTE_MAIL}",
         "firstname":"${LDAP_ATTRIBUTE_FIRST_NAME}",
-        "lastname":"${LDAP_ATTRIBUTE_LAST_NAME}"
+        "lastname":"${LDAP_ATTRIBUTE_LAST_NAME}",
+        "phonenumber":"${LDAP_ATTRIBUTE_PHONE}"
         }';
 
     //Default role assignments upon first login. (Optional) Can be updated in user settings for each user
@@ -216,6 +220,7 @@ class config
     \$this->appUrl = \$this->configEnvironmentHelper("LEAN_APP_URL", \$this->appUrl);
     \$this->primarycolor = \$this->configEnvironmentHelper("LEAN_PRIMARY_COLOR", \$this->primarycolor);
     \$this->secondarycolor = \$this->configEnvironmentHelper("LEAN_SECONDARY_COLOR", \$this->secondarycolor);
+    \$this->debug = \$this->configEnvironmentHelper("LEAN_DEBUG", \$this->debug);
     \$this->defaultTimezone = \$this->configEnvironmentHelper("TIMEZONE", \$this->defaultTimezone);
 
     /* Database */
@@ -223,6 +228,7 @@ class config
     \$this->dbUser = \$this->configEnvironmentHelper("LEAN_DB_USER", \$this->dbUser);
     \$this->dbPassword = \$this->configEnvironmentHelper("LEAN_DB_PASSWORD", \$this->dbPassword);
     \$this->dbDatabase = \$this->configEnvironmentHelper("LEAN_DB_DATABASE", \$this->dbDatabase);
+    \$this->dbPort = \$this->configEnvironmentHelper("LEAN_DB_PORT", \$this->dbPort);
 
     /* Fileupload */
     \$this->userFilePath= \$this->configEnvironmentHelper("LEAN_USER_FILE_PATH", \$this->userFilePath);

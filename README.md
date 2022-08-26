@@ -161,6 +161,7 @@ Can also be set within the application
 | `LDAP_ATTRIBUTE_GROUPS`          | LDAP Attribute Groups                                                                                       | `memberOf`                |
 | `LDAP_ATTRIBUTE_LAST_NAME`       | LDAP Attribute Last Name                                                                                    | `sn`                      |
 | `LDAP_ATTRIBUTE_MAIL`            | LDAP Attribute Mail                                                                                         | `mail`                    |
+| `LDAP_ATTRIBUTE_PHONE`           | LDAP Attribute Phone                                                                                        | `phone`                   |
 | `LDAP_ATTRIBUTE_USER`            | LDAP Attribute User                                                                                         | `uid`                     |
 | `LDAP_BASE_DN`                   | BaseDN eg `dc=example,dc=com`                                                                               |                           |
 | `LDAP_BIND_DN`                   | Bind User                                                                                                   |                           |

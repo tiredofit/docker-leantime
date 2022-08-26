@@ -1,3 +1,11 @@
+## 1.0.7 2022-08-25 <dave at tiredofit dot ca>
+
+   ### Added
+      - Introduce LDAP_ATTRIBUTE_PHONE
+      - Introduce DB_PORT
+      - Introduce proper APP_DEBUG environment variable
+
+
 ## 1.0.6 2022-08-25 <dave at tiredofit dot ca>
 
    ### Changed
