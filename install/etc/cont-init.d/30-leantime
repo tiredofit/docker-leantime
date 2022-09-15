@@ -141,7 +141,7 @@ class config
     public \$userFilePath= "${STORAGE_FILE_PATH}/";
     public \$dbBackupPath = "${BACKUP_FILE_PATH}/";
 
-    public \$useS3 = "${s3_enabled,,}";
+    public \$useS3 = ${s3_enabled,,};
     public \$s3Key = "${S3_KEY}";
     public \$s3Secret = "${S3_SECRET}";
     public \$s3Bucket = "${S3_BUCKET}";
