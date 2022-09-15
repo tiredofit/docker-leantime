@@ -1,3 +1,9 @@
+## 1.0.8 2022-09-15 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for New Install Looping not being able to find a file
+
+
 ## 1.0.7 2022-08-25 <dave at tiredofit dot ca>
 
    ### Added
