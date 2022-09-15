@@ -20,7 +20,7 @@ ln -sf /www/logs/leantime "${NGINX_WEBROOT}"/resources/logs
 create_logrotate leantime /www/logs/leantime/error.log "${NGINX_USER}" "${NGINX_GROUP}"
 
 ### Check if New Install
-if [ ! -f "${NGINX_WEBROOT}"/server.php ]; then
+if [ ! -f "${NGINX_WEBROOT}"/public/index.php ]; then
     print_warn "Potential New Installation / Standalone Installation Detected - Copying Leantime Sourcecode"
     silent cp -a /assets/install/* "${NGINX_WEBROOT}"
 
