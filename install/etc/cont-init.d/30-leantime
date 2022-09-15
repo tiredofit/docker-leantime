@@ -20,7 +20,7 @@ ln -sf /www/logs/leantime "${NGINX_WEBROOT}"/resources/logs
 create_logrotate leantime /www/logs/leantime/error.log "${NGINX_USER}" "${NGINX_GROUP}"
 
 ### Check if New Install
-if [ ! -f "${NGINX_WEBROOT}"/server.php ]; then
+if [ ! -f "${NGINX_WEBROOT}"/public/index.php ]; then
     print_warn "Potential New Installation / Standalone Installation Detected - Copying Leantime Sourcecode"
     silent cp -a /assets/install/* "${NGINX_WEBROOT}"
 
@@ -141,7 +141,7 @@ class config
     public \$userFilePath= "${STORAGE_FILE_PATH}/";
     public \$dbBackupPath = "${BACKUP_FILE_PATH}/";
 
-    public \$useS3 = ${s3_enabled,,};
+    public \$useS3 = "${s3_enabled,,}";
     public \$s3Key = "${S3_KEY}";
     public \$s3Secret = "${S3_SECRET}";
     public \$s3Bucket = "${S3_BUCKET}";
