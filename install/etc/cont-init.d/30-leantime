@@ -4,6 +4,8 @@ source /assets/functions/00-container
 prepare_service
 PROCESS_NAME="leantime"
 
+s3_enabled="false"
+
 check_service_initialized init 20-php-fpm
 
 ### Sanity Test
@@ -26,7 +28,6 @@ if [ ! -f "${NGINX_WEBROOT}"/public/index.php ]; then
 
     ### If running with /www/html or NGINX_WEBROOT mapped, then create persistent storage
     ### Storage redirection
-    s3_enabled="false"
     if [ -d "/data" ]; then
         print_warn "Detected /data directory. Persistently saving settings and volatile information"
         case "${STORAGE_TYPE,,}" in
