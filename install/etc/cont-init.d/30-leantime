@@ -33,8 +33,8 @@ if [ ! -f "${NGINX_WEBROOT}"/public/index.php ]; then
             files* | local )
                 rm -rf "${NGINX_WEBROOT}"/public/userfiles
                 mkdir -p "${NGINX_WEBROOT}"/public/
-                ln -sf /data/userfiles "${NGINX_WEBROOT}"/public/userfiles
-                mkdir -p /data/storage
+                mkdir -p /data/storage/public
+                ln -sf /data/storage/public "${NGINX_WEBROOT}"/public/userfiles
                 rm -rf "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
                 ln -sf /data/storage "${NGINX_WEBROOT}"/"${STORAGE_FILE_PATH}"
                 ln -sf /data/config "${NGINX_WEBROOT}"/config/configuration.php
