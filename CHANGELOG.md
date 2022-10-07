@@ -1,3 +1,13 @@
+## 1.0.10 2022-10-07 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix storage issues of logo (@ArjenR@github)
+      - Fix Nginx configuration (ArjenR@github)
+      - Fix for not using local file storage (@ArjenR@github)
+      - Tweak S3 Configuration (ArjenR@github)
+      - Change the way installation files get cloned
+
+
 ## 1.0.9 2022-10-05 <dave at tiredofit dot ca>
 
    ### Changed

@@ -21,7 +21,8 @@ ENV LEANTIME_VERSION=v2.2.7 \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-leantime/"
 
 ### Perform Installation
-RUN set -x && \
+RUN source /assets/functions/00-container && \
+    set -x && \
     apk update && \
     apk upgrade && \
     apk add -t .leantime-build-deps \
@@ -38,10 +39,7 @@ RUN set -x && \
     \
 ### WWW  Installation
     php-ext enable core && \
-    mkdir -p /assets/install && \
-    git clone ${LEANTIME_REPO_URL} /assets/install && \
-    cd /assets/install && \
-    git checkout ${LEANTIME_VERSION} && \
+    clone_git_repo ${LEANTIME_REPO_URL} ${LEANTIME_VERSION} /assets/install && \
     composer install && \
     npm install && \
     ./node_modules/grunt/bin/grunt Build-All && \
