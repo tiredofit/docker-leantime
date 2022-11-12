@@ -1,3 +1,9 @@
+## 1.0.13 2022-11-11 <dave at tiredofit dot ca>
+
+   ### Added
+      - Leantimew 2.2.11
+
+
 ## 1.0.12 2022-10-21 <dave at tiredofit dot ca>
 
    ### Added
