@@ -1,8 +1,12 @@
-FROM docker.io/tiredofit/nginx-php-fpm:8.0
+ARG PHP_BASE=8.0
+ARG DISTRO="alpine"
+
+FROM docker.io/tiredofit/nginx-php-fpm:${PHP_BASE}-${DISTRO}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-### Set Defaults
-ENV LEANTIME_VERSION=v2.2.11 \
+ARG LEANTIME_VERSION
+
+ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.4"} \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \
@@ -17,41 +21,38 @@ ENV LEANTIME_VERSION=v2.2.11 \
     PHP_ENABLE_TOKENIZER=TRUE \
     PHP_ENABLE_XMLWRITER=TRUE \
     PHP_ENABLE_ZIP=TRUE \
+    LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
     IMAGE_NAME="tiredofit/leantime" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-leantime/"
 
-### Perform Installation
 RUN source /assets/functions/00-container && \
     set -x && \
-    apk update && \
-    apk upgrade && \
-    apk add -t .leantime-build-deps \
+    package update && \
+    package upgrade && \
+    package install .leantime-build-deps \
               git \
               nodejs \
               npm \
               && \
     \
-    apk add -t .leantime-run-deps \
+    package install .leantime-run-deps \
               expect \
               gnu-libiconv \
               sed \
               && \
     \
-### WWW  Installation
     php-ext enable core && \
-    clone_git_repo ${LEANTIME_REPO_URL} ${LEANTIME_VERSION} /assets/install && \
+    clone_git_repo "${LEANTIME_REPO_URL}" "${LEANTIME_VERSION}" /assets/install && \
     composer install && \
     npm install && \
     ./node_modules/grunt/bin/grunt Build-All && \
     rm -rf /assets/install/nginx.conf && \
-    chown -R nginx:www-data /assets/install && \
+    chown -R "${NGINX_USER}":"${NGINX_GROUP}" /assets/install && \
     \
-### Cleanup
-    apk del .leantime-build-deps && \
-    rm -rf /root/.composer /root/.config /root/.npm && \
-    rm -rf /var/tmp/* /var/cache/apk/*
+    package remove .leantime-build-deps && \
+    package cleanup && \
+    rm -rf /root/.composer \
+           /root/.config \
+           /root/.npm
 
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-
-### Assets
 COPY install /

@@ -1,3 +1,13 @@
+## 1.0.14 2023-01-05 <dave at tiredofit dot ca>
+
+   ### Added
+      - Leantime 2.3.4
+      - Added `SPECIFY_MENU_PER_PROJECT` environment variable
+      - Added `PERSIST_THEME` environment variable
+      - Added `SMTP_TLS_NO_VERIFY` environment variable
+      - Updated build to current build process format
+
+
 ## 1.0.13 2022-11-11 <dave at tiredofit dot ca>
 
    ### Added

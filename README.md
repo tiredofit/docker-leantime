@@ -120,23 +120,25 @@ Be sure to view the following repositories to understand all the customizable op
 
 #### Application Settings
 
-| Parameter               | Description                                                                                    | Default             |
-| ----------------------- | ---------------------------------------------------------------------------------------------- | ------------------- |
-| `ADMIN_EMAIL`           | Administrator Email Address - Needed for logging in                                            | `admin@example.com` |
-| `ADMIN_FIRST_NAME`      | Admin user First Name                                                                          | `Admin`             |
-| `ADMIN_LAST_NAME`       | Admin user First Name                                                                          | `User`              |
-| `ADMIN_PASS`            | Adminsitrator Password                                                                         | `admin`             |
-| `APP_DEBUG`             | Application Debug Mode                                                                         | `FALSE`             |
-| `COMPANY_NAME`          | Company Name                                                                                   | `Example Company`   |
-| `DEFAULT_COLOR`         | Default Color for header                                                                       | `1b75bb`            |
-| `ENABLE_AUTO_UPDATE`    | If coming from an earlier version of image, automatically update it to latest leantime release | `TRUE`              |
-| `LANGUAGE`              | Application Language                                                                           | `en-US`             |
-| `SESSION_EXPIRE`        | Session expiry in seconds                                                                      | `28800`             |
-| `SETUP_TYPE`            | Automatically generate configuration via environment variables `AUTO` `MANUAL`                 | `AUTO`              |
-| `SITE_NAME`             | Name of your Site                                                                              | `Leantime`          |
-| `SITE_URL`              | The url your site listens on example `https://leantime.example.com`                            |                     |
-| `THEME_COLOR_PRIMARY`   | Primary Theme Colour                                                                           | `#1b75bb`           |
-| `THEME_COLOR_SECONDARY` | Secondary Theme Colour                                                                         | `#81b1a8`           |
+| Parameter                  | Description                                                                                    | Default             |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------- |
+| `ADMIN_EMAIL`              | Administrator Email Address - Needed for logging in                                            | `admin@example.com` |
+| `ADMIN_FIRST_NAME`         | Admin user First Name                                                                          | `Admin`             |
+| `ADMIN_LAST_NAME`          | Admin user First Name                                                                          | `User`              |
+| `ADMIN_PASS`               | Adminsitrator Password                                                                         | `admin`             |
+| `APP_DEBUG`                | Application Debug Mode                                                                         | `FALSE`             |
+| `COMPANY_NAME`             | Company Name                                                                                   | `Example Company`   |
+| `DEFAULT_COLOR`            | Default Color for header                                                                       | `1b75bb`            |
+| `ENABLE_AUTO_UPDATE`       | If coming from an earlier version of image, automatically update it to latest leantime release | `TRUE`              |
+| `LANGUAGE`                 | Application Language                                                                           | `en-US`             |
+| `PERSIST_THEME`            | Persist Theme and Fonts after setting                                                          | `TRUE`              |
+| `SESSION_EXPIRE`           | Session expiry in seconds                                                                      | `28800`             |
+| `SETUP_TYPE`               | Automatically generate configuration via environment variables `AUTO` `MANUAL`                 | `AUTO`              |
+| `SITE_NAME`                | Name of your Site                                                                              | `Leantime`          |
+| `SITE_URL`                 | The url your site listens on example `https://leantime.example.com`                            |                     |
+| `SPECIFY_MENU_PER_PROJECT` | Allow to specify menu upon new project creation                                                | `TRUE`              |
+| `THEME_COLOR_PRIMARY`      | Primary Theme Colour                                                                           | `#1b75bb`           |
+| `THEME_COLOR_SECONDARY`    | Secondary Theme Colour                                                                         | `#81b1a8`           |
 
 Make sure you also set your `TIMEZONE` variable as referenced in the base image.
 
@@ -153,30 +155,30 @@ Make sure you also set your `TIMEZONE` variable as referenced in the base image.
 
 Can also be set within the application
 
-| Parameter                        | Description                                                                                                 | default                   |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------- |
-| `ENABLE_LDAP`                    | Enable LDAP Functionality                                                                                   | `FALSE`                   |
-| `LDAP_ATTRIBUTE_FIRST_NAME`      | LDAP Attribute First Name                                                                                   | `givenName`               |
-| `LDAP_ATTRIBUTE_GROUPS`          | LDAP Attribute Groups                                                                                       | `memberOf`                |
-| `LDAP_ATTRIBUTE_LAST_NAME`       | LDAP Attribute Last Name                                                                                    | `sn`                      |
-| `LDAP_ATTRIBUTE_MAIL`            | LDAP Attribute Mail                                                                                         | `mail`                    |
-| `LDAP_ATTRIBUTE_PHONE`           | LDAP Attribute Phone                                                                                        | `phone`                   |
-| `LDAP_ATTRIBUTE_USER`            | LDAP Attribute User                                                                                         | `uid`                     |
-| `LDAP_BASE_DN`                   | BaseDN eg `dc=example,dc=com`                                                                               |                           |
-| `LDAP_BIND_DN`                   | Bind User                                                                                                   |                           |
-| `LDAP_BIND_PASS`                 | Bind Pass                                                                                                   |                           |
-| `LDAP_DEFAULT_ROLE`              |                                                                                                             |                           |
-| `LDAP_DEFAULT_USER_KEY`          | Default role to add new users `10` client `20` developer `30` Client Manager `40` Manager`50` Administrator | `20`                      |
-| `LDAP_DN`                        | Users Location eg `cn=users,dc=example,dc=com`                                                              |                           |
-| `LDAP_GROUP_ROLE_ADMIN`          | LDAP Group name to assign Admin (40) Role                                                                   | `leantime-admin`          |
-| `LDAP_GROUP_ROLE_CLIENT_MANAGER` | LDAP Group name to assign Client Manager (30) Role                                                          | `leantime-clientmanager`  |
-| `LDAP_GROUP_ROLE_CLIENT`         | LDAP Group name to assign Client (10) Role                                                                  | `leantime-client`         |
-| `LDAP_GROUP_ROLE_DEVELOPER`      | LDAP Group name to assign Developer (20) Role                                                               | `leantime-developer`      |
-| `LDAP_GROUP_ROLE_MANAGER`        | LDAP Group name to assign Manager (40) Role                                                                 | `leantime-manager`        |
-| `LDAP_HOST`                      | LDAP Hostname                                                                                               |                           |
-| `LDAP_PORT`                      | LDAP Port                                                                                                   | `389`                     |
-| `LDAP_TYPE`                      | `OL` OpenLDAP or `AD` Active Directory                                                                      | `OL`                      |
-| `LDAP_USER_DOMAIN`               | Users domain eg '@example.com`                                                                              |                           |
+| Parameter                        | Description                                                                                                 | default                  |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `ENABLE_LDAP`                    | Enable LDAP Functionality                                                                                   | `FALSE`                  |
+| `LDAP_ATTRIBUTE_FIRST_NAME`      | LDAP Attribute First Name                                                                                   | `givenName`              |
+| `LDAP_ATTRIBUTE_GROUPS`          | LDAP Attribute Groups                                                                                       | `memberOf`               |
+| `LDAP_ATTRIBUTE_LAST_NAME`       | LDAP Attribute Last Name                                                                                    | `sn`                     |
+| `LDAP_ATTRIBUTE_MAIL`            | LDAP Attribute Mail                                                                                         | `mail`                   |
+| `LDAP_ATTRIBUTE_PHONE`           | LDAP Attribute Phone                                                                                        | `phone`                  |
+| `LDAP_ATTRIBUTE_USER`            | LDAP Attribute User                                                                                         | `uid`                    |
+| `LDAP_BASE_DN`                   | BaseDN eg `dc=example,dc=com`                                                                               |                          |
+| `LDAP_BIND_DN`                   | Bind User                                                                                                   |                          |
+| `LDAP_BIND_PASS`                 | Bind Pass                                                                                                   |                          |
+| `LDAP_DEFAULT_ROLE`              |                                                                                                             |                          |
+| `LDAP_DEFAULT_USER_KEY`          | Default role to add new users `10` client `20` developer `30` Client Manager `40` Manager`50` Administrator | `20`                     |
+| `LDAP_DN`                        | Users Location eg `cn=users,dc=example,dc=com`                                                              |                          |
+| `LDAP_GROUP_ROLE_ADMIN`          | LDAP Group name to assign Admin (40) Role                                                                   | `leantime-admin`         |
+| `LDAP_GROUP_ROLE_CLIENT_MANAGER` | LDAP Group name to assign Client Manager (30) Role                                                          | `leantime-clientmanager` |
+| `LDAP_GROUP_ROLE_CLIENT`         | LDAP Group name to assign Client (10) Role                                                                  | `leantime-client`        |
+| `LDAP_GROUP_ROLE_DEVELOPER`      | LDAP Group name to assign Developer (20) Role                                                               | `leantime-developer`     |
+| `LDAP_GROUP_ROLE_MANAGER`        | LDAP Group name to assign Manager (40) Role                                                                 | `leantime-manager`       |
+| `LDAP_HOST`                      | LDAP Hostname                                                                                               |                          |
+| `LDAP_PORT`                      | LDAP Port                                                                                                   | `389`                    |
+| `LDAP_TYPE`                      | `OL` OpenLDAP or `AD` Active Directory                                                                      | `OL`                     |
+| `LDAP_USER_DOMAIN`               | Users domain eg '@example.com`                                                                              |                          |
 
 | Parameter           | Description                                                          | default         |
 | ------------------- | -------------------------------------------------------------------- | --------------- |
@@ -211,17 +213,18 @@ Used only if `STORAGE_TYPE` = `S3`
 
 Used only if `SMTP_ENABLE` = `TRUE`
 
-| Parameter       | Description                                                         | default |
-| --------------- | ------------------------------------------------------------------- | ------- |
-| `SMTP_ENABLE`   | Use configured SMTP servers or rely on internal PHP mail() function | `FALSE` |
-| `SMTP_AUTH`     | Use SMTP Authentication `TRUE` or `FALSE`                           | `FALSE` |
-| `SMTP_FROM`     | SMTP From Name / Return Email Address                               |         |
-| `SMTP_HOST`     | SMTP Host                                                           |         |
-| `SMTP_PASS`     | SMTP Password                                                       |         |
-| `SMTP_PORT`     | SMTP Port                                                           |         |
-| `SMTP_PROTOCOL` | SMTP Security Protocol `TLS`, `SSL`, `STARTTLS`                     |         |
-| `SMTP_TLS_AUTO` | Automatically detect if we can use TLS                              | `TRUE`  |
-| `SMTP_USER`     | SMTP User                                                           |         |
+| Parameter            | Description                                                         | default |
+| -------------------- | ------------------------------------------------------------------- | ------- |
+| `SMTP_ENABLE`        | Use configured SMTP servers or rely on internal PHP mail() function | `FALSE` |
+| `SMTP_AUTH`          | Use SMTP Authentication `TRUE` or `FALSE`                           | `FALSE` |
+| `SMTP_FROM`          | SMTP From Name / Return Email Address                               |         |
+| `SMTP_HOST`          | SMTP Host                                                           |         |
+| `SMTP_PASS`          | SMTP Password                                                       |         |
+| `SMTP_PORT`          | SMTP Port                                                           |         |
+| `SMTP_PROTOCOL`      | SMTP Security Protocol `TLS`, `SSL`, `STARTTLS`                     |         |
+| `SMTP_TLS_AUTO`      | Automatically detect if we can use TLS                              | `TRUE`  |
+| `SMTP_TLS_NO_VERIFY` | Skip checking TLS certificate when connecting                       | `FALSE` |
+| `SMTP_USER`          | SMTP User                                                           |         |
 
 ### Networking
 
