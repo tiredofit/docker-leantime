@@ -69,7 +69,7 @@ docker pull docker.io/tiredofdit/leantime:(imagetag)
 Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-leantime/pkgs/container/docker-leantime) 
  
 ```
-docker pull ghcr.io/tiredofit/docker-leantime/pkgs/container/docker-leantime):(imagetag)
+docker pull ghcr.io/tiredofit/docker-leantime:(imagetag)
 ``` 
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
