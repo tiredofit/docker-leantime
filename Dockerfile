@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG LEANTIME_VERSION
 
-ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.14"} \
+ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.15"} \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \
@@ -21,7 +21,6 @@ ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.14"} \
     PHP_ENABLE_TOKENIZER=TRUE \
     PHP_ENABLE_XMLWRITER=TRUE \
     PHP_ENABLE_ZIP=TRUE \
-    LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
     IMAGE_NAME="tiredofit/leantime" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-leantime/"
 
