@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG LEANTIME_VERSION
 
-ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.17"} \
+ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.19"} \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \
