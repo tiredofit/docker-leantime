@@ -63,7 +63,7 @@ Clone this repository and build the image with `docker build <arguments> (imagen
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/leantime)
 
 ```bash
-docker pull docker.io/tiredofdit/leantime:(imagetag)
+docker pull docker.io/tiredofit/leantime:(imagetag)
 ```
 
 Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-leantime/pkgs/container/docker-leantime) 
