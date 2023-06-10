@@ -130,7 +130,6 @@ class config
     public \$defaultTimezone = "${TIMEZONE}";
     public \$primarycolor = '${THEME_COLOR_PRIMARY}';
     public \$secondarycolor = '${THEME_COLOR_SECONDARY}';
-    public \$defaultTimezone = '${TIMEZONE}';
     public \$enableMenuType = false;
     public \$keepTheme = true;
     public \$debug = ${APP_DEBUG};

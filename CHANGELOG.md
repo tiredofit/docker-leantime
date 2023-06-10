@@ -1,3 +1,9 @@
+## 1.0.27 2023-06-10 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Remove duplicate TIMEZONE declaration (#12)
+
+
 ## 1.0.26 2023-05-09 <dave at tiredofit dot ca>
 
    ### Added
