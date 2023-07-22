@@ -44,7 +44,7 @@ RUN source /assets/functions/00-container && \
     clone_git_repo "${LEANTIME_REPO_URL}" "${LEANTIME_VERSION}" /assets/install && \
     composer install && \
     npm install && \
-    ./node_modules/grunt/bin/grunt Build-All && \
+    npx mix && \
     rm -rf /assets/install/nginx.conf && \
     chown -R "${NGINX_USER}":"${NGINX_GROUP}" /assets/install && \
     \

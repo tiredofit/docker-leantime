@@ -1,3 +1,9 @@
+## 1.0.30 2023-07-22 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Stop using grunt and switch to webpack when building
+
+
 ## 1.0.29 2023-07-22 <dave at tiredofit dot ca>
 
    ### Added
