@@ -1,4 +1,4 @@
-ARG PHP_BASE=8.0
+ARG PHP_BASE=8.2
 ARG DISTRO="alpine"
 
 FROM docker.io/tiredofit/nginx-php-fpm:${PHP_BASE}-${DISTRO}
@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG LEANTIME_VERSION
 
-ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.3.27"} \
+ENV LEANTIME_VERSION=${LEANTIME_VERSION:-"v2.4"} \
     LEANTIME_REPO_URL=https://github.com/Leantime/leantime \
     NGINX_SITE_ENABLED=leantime \
     NGINX_WEBROOT=/www/html \

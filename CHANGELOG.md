@@ -1,3 +1,10 @@
+## 1.0.31 2023-10-08 <dave at tiredofit dot ca>
+
+   ### Added
+      - Leantime 2.4
+      - PHP 8.2
+
+
 ## 1.0.30 2023-07-22 <dave at tiredofit dot ca>
 
    ### Changed
