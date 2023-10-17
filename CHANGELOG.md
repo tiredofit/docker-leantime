@@ -1,3 +1,9 @@
+## 1.0.35 2023-10-17 <ArjenR@github>
+
+   ### Added
+      - Fix configuration namespace for leantime 2.4
+
+
 ## 1.0.34 2023-10-17 <dave at tiredofit dot ca>
 
    ### Added
