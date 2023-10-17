@@ -118,9 +118,17 @@ if [ "${SETUP_TYPE,,}" = "auto" ]; then
 
     cat <<EOF > "${NGINX_WEBROOT}"/config/configuration.php
 <?php
-namespace leantime\core;
 
-class config
+namespace Leantime\Config;
+
+/***
+ *
+ * Config class
+ * This class is included for backwards compatibility and to be used with subfolder installations
+ *
+ * @see config/sample.env
+ */
+class Config
 {
     /* General */
     public \$sitename = "${SITE_NAME}";
