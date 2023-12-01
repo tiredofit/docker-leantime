@@ -1,4 +1,3 @@
-version: '2.4'
 
 services:
   leantime-app:
@@ -6,7 +5,7 @@ services:
     container_name: leantime-app
     labels:
       - traefik.enable=true
-      - traefik.http.routers.leantime.rule=Host(`monica.example.com`)
+      - traefik.http.routers.leantime.rule=Host(`leantime.example.com`)
       - traefik.http.services.leantime.loadbalancer.server.port=80
     links:
       - leantime-db
@@ -60,15 +59,16 @@ services:
     volumes:
       - ./dbbackup:/backup
     environment:
+      - TIMEZONE=America/Vancouver
       - CONTAINER_NAME=leantime-db-backup
-      - DB_HOST=leantime-db
-      - DB_TYPE=mariadb
-      - DB_NAME=leantime
-      - DB_USER=leantime
-      - DB_PASS=leantime
-      - DB_DUMP_FREQ=1440
-      - DB_DUMP_BEGIN=0000
-      - DB_CLEANUP_TIME=8640
+      - DB01_HOST=leantime-db
+      - DB01_TYPE=mariadb
+      - DB01_NAME=leantime
+      - DB01_USER=leantime
+      - DB01_PASS=leantime
+      - DB01_BACKUP_INTERVAL=1440
+      - DB01_BACKUP_BEGIN=0000
+      - DB01_CLEANUP_TIME=8640
     networks:
       - services
     restart: always
